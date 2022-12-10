@@ -6,8 +6,7 @@ def Snowball(GameObject):
         self.limg.x=self.limg.x + self.velocity[0]
         self.limg.y = self.limg.y + self.velocity[1]
     def collision(self,object):
-        self.lobject=object.get_rect()
-        if self.limg.colliderect(self.lobject)==True:
+        if self.limg.colliderect(object.get_rect())==True:
             for obj in self.game.currScene.objects.keys:
                 if self.game.currScene.objects[obj] is object:
                     del(self.game.currScene.objects[self.game.currScene.objects.keys])
