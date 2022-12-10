@@ -1,14 +1,23 @@
 import pygame
-import time
+from Scene import Scene
+from GameObject import GameObject
 
 class Game:
     size = (640, 480)
-    objects = {}
+    currScene = Scene({})
+
+    def set_scene(self, scene):
+        self.currScene = scene
+        self._display_surf.fill(0)
 
     def on_init(self):
         pygame.init()
         self._display_surf = pygame.display.set_mode(self.size, pygame.HWSURFACE | pygame.DOUBLEBUF)
         self._running = True
+
+        self.currScene.add_obj("bg", GameObject(self, 0, 0, 640, 480, "assets/TitleScreen.png"))
+        self.currScene.add_obj("start", GameObject(self, 300, 300, 185, 69, "assets/StartButton.png"))
+        self.currScene.add_obj("exit", GameObject(self, 300, 400, 185, 69, "assets/ExitButton.png"))
 
     def on_event(self, event):
         if event.type == pygame.QUIT:
@@ -20,7 +29,7 @@ class Game:
         pass
 
     def on_render(self):
-        for object in self.objects.values():
+        for object in self.currScene.objects.values():
             if object.visible:
                 self._display_surf.blit(object.img, object.rect)
         pygame.display.update()
@@ -34,6 +43,5 @@ class Game:
 
         while (self._running):
             self.on_loop()
-            time.sleep(0.01)
             self.on_render()
         self.on_cleanup()
