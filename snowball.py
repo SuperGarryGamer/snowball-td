@@ -8,8 +8,13 @@ def Snowball(GameObject):
     def collision(self,object):
         self.lobject=object.get_rect()
         if self.limg.colliderect(self.lobject)==True:
-            self.setVisible(0)
-            object.setVisible(0)
+            for obj in self.game.currScene.objects.keys:
+                if self.game.currScene.objects[obj] is object:
+                    del(self.game.currScene.objects[self.game.currScene.objects.keys])
+
+            for obj in self.game.currScene.objects.keys:
+                if self.game.currScene.objects[obj] is self:
+                    del(self.game.currScene.objects[self.game.currScene.objects.keys])
 
 
 
