@@ -2,6 +2,7 @@ import pygame
 import time
 
 from Button import Button
+from PlayField import PlayField
 from Scene import Scene
 from GameObject import GameObject
 
@@ -19,7 +20,7 @@ class Game:
         self._running = True
 
         self.currScene.add_obj("bg", GameObject(self, 0, 0, "./assets/TitleScreen.png"))
-        self.currScene.add_obj("start", Button(self, 250, 200, "./assets/StartButton.png", lambda: print("")))
+        self.currScene.add_obj("start", Button(self, 250, 200, "./assets/StartButton.png", lambda: self.set_scene(PlayField({}, self))))
         self.currScene.add_obj("exit", Button(self, 250, 300, "./assets/ExitButton.png", lambda: self.on_cleanup()))
 
     def on_event(self, event):
