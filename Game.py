@@ -10,6 +10,11 @@ class Game:
     size = (640, 480)
     currScene = Scene({})
 
+    def pickup(self):
+        if "uwu" in self.currScene.objects.keys(): return
+        self.currScene.add_obj("uwu", GameObject(self, 0, 0, "./assets/cannon.png"))
+        self.currScene.objects["uwu"].sticky = True
+
     def set_scene(self, scene):
         self.currScene = scene
         self._display_surf.fill(0)
@@ -34,9 +39,14 @@ class Game:
                     if event.pos[0] > obj.limg.x and event.pos[0] < obj.limg.x + obj.limg.w:
                         if event.pos[1] > obj.limg.y and event.pos[1] < obj.limg.y + obj.limg.h:
                             obj.onclick()
+                            break
 
     def on_loop(self):
         time.sleep(0.05)
+        for obj in self.currScene.objects.values():
+            if hasattr(obj, "sticky"):
+                obj.limg.x = pygame.mouse.get_pos()[0]
+                obj.limg.y = pygame.mouse.get_pos()[1]
 
     def on_render(self):
         self._display_surf.fill(0)
