@@ -1,4 +1,5 @@
 import pygame
+import time
 from Scene import Scene
 from GameObject import GameObject
 
@@ -16,8 +17,8 @@ class Game:
         self._running = True
 
         self.currScene.add_obj("bg", GameObject(self, 0, 0, "./assets/TitleScreen.png"))
-        self.currScene.add_obj("start", GameObject(self, 300, 300, "./assets/StartButton.png"))
-        self.currScene.add_obj("exit", GameObject(self, 300, 400, "./assets/ExitButton.png"))
+        self.currScene.add_obj("start", GameObject(self, 250, 200, "./assets/StartButton.png"))
+        self.currScene.add_obj("exit", GameObject(self, 250, 300, "./assets/ExitButton.png"))
 
     def on_event(self, event):
         if event.type == pygame.QUIT:
@@ -26,7 +27,8 @@ class Game:
             pass
 
     def on_loop(self):
-        pass
+        time.sleep(0.05)
+        self.currScene.objects["exit"].limg.y -= 10
 
     def on_render(self):
         self._display_surf.fill(0)
@@ -43,6 +45,8 @@ class Game:
             self._running = False
 
         while (self._running):
+            for event in pygame.event.get():
+                self.on_event(event)
             self.on_loop()
             self.on_render()
         self.on_cleanup()
