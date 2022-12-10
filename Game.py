@@ -1,7 +1,5 @@
 import pygame
 import time
-
-from Button import Button
 from Scene import Scene
 from GameObject import GameObject
 
@@ -19,26 +17,18 @@ class Game:
         self._running = True
 
         self.currScene.add_obj("bg", GameObject(self, 0, 0, "./assets/TitleScreen.png"))
-        self.currScene.add_obj("start", Button(self, 250, 200, "./assets/StartButton.png", lambda: print("asdfasdfasdf")))
-        self.currScene.add_obj("exit", Button(self, 250, 300, "./assets/ExitButton.png", lambda: self.on_cleanup()))
+        self.currScene.add_obj("start", GameObject(self, 250, 200, "./assets/StartButton.png"))
+        self.currScene.add_obj("exit", GameObject(self, 250, 300, "./assets/ExitButton.png"))
 
     def on_event(self, event):
         if event.type == pygame.QUIT:
             self._running = False
         if event.type == pygame.KEYDOWN:
             pass
-        if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
-            for obj_k in self.currScene.objects.keys():
-                obj = self.currScene.objects[obj_k]
-                if event.pos[0] > obj.limg.x and event.pos[0] < obj.limg.x + obj.limg.w:
-                    if event.pos[1] > obj.limg.y and event.pos[1] < obj.limg.y + obj.limg.h:
-                        if isinstance(obj, Button):
-                            obj.onclick()
-
-            print(event)
 
     def on_loop(self):
         time.sleep(0.05)
+        self.currScene.objects["exit"].limg.y -= 10
 
     def on_render(self):
         self._display_surf.fill(0)
