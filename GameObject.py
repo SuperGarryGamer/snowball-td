@@ -5,7 +5,7 @@ class GameObject(pygame.sprite.Sprite):
     collision = True
     velocity = [0, 0]
 
-    def __init__(self, game, x, y, w, h, img_path, visible=True, grabbable=False, collision=True):
+    def __init__(self, game, x, y, w, h, img_path, visible=True, collision=True):
         pygame.sprite.Sprite.__init__(self)
         self.game = game
         self.rect = pygame.Rect(x, y, w, h)
