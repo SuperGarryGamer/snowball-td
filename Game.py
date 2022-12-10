@@ -2,6 +2,7 @@ import pygame
 import time
 
 class Game:
+    size = (640, 480)
     objects = {}
 
     def on_init(self):
@@ -19,6 +20,9 @@ class Game:
         pass
 
     def on_render(self):
+        for object in self.objects.values():
+            if object.visible:
+                self._display_surf.blit(object.img, object.rect)
         pygame.display.update()
 
     def on_cleanup(self):
@@ -30,5 +34,6 @@ class Game:
 
         while (self._running):
             self.on_loop()
+            time.sleep(0.01)
             self.on_render()
         self.on_cleanup()
