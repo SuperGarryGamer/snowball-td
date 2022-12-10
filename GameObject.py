@@ -5,11 +5,13 @@ class GameObject(pygame.sprite.Sprite):
     collision = True
     velocity = [0, 0]
 
-    def __init__(self, game, x, y, w, h, img_path, visible=True, collision=True):
+    def __init__(self, game, x, y, img_path, visible=True,collision=True):
         pygame.sprite.Sprite.__init__(self)
         self.game = game
-        self.rect = pygame.Rect(x, y, w, h)
-        self.img = pygame.transform.scale(pygame.image.load(img_path), (w, h))
+        self.img=pygame.image.load(img_path)
+        self.limg = self.img.get_rect()
+        self.limg.x=x
+        self.limg.y=y
         self.collision = collision
 
     def setVisible(self, vis):
@@ -18,8 +20,4 @@ class GameObject(pygame.sprite.Sprite):
     def setCollision(self, coll):
         self.collision = coll
 
-    def setImage(self, img):
-        self.img = pygame.transform.scale(img, (self.rect.w, self.rect.h))
 
-    def tryMove(self, x, y):
-        pass
