@@ -11,4 +11,4 @@ class Burglar(GameObject):
     def on_House(self):
         if self.limg.x<=0:
             scene2=Scene()
-            scene2.objects={"Game Over": (self.game,0,0,'assets/GameOverScreen.png')}
+            scene2.objects={"Game Over": GameObject(self.game,0,0,'assets/GameOverScreen.png')}
