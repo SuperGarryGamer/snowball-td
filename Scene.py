@@ -1,5 +1,5 @@
 import GameObject
-
+#
 class Scene:
     objects = {}
 
