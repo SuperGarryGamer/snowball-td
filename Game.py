@@ -28,7 +28,7 @@ class Game:
 
     def on_loop(self):
         time.sleep(0.05)
-        self.currScene.objects["exit"].limg.y -= 10
+        #self.currScene.objects["exit"].limg.y -= 10
 
     def on_render(self):
         self._display_surf.fill(0)
