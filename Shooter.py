@@ -11,6 +11,4 @@ def Shooter(GameObject):
             for obj in self.game.currScene.objects.keys:
                 if self.game.currScene.objects[obj] is self:
                     del(self.game.currScene.objects[self.game.currScene.objects.keys])
-    def collision(self,object):
-        if self.limg.colliderect(object.get_rect())==True:
-            self.health=self.health-1
+

@@ -12,3 +12,10 @@ class Burglar(GameObject):
         if self.limg.x<=0:
             scene2=Scene()
             scene2.objects={"Game Over": GameObject(self.game,0,0,'assets/GameOverScreen.png')}
+    def collision(self,object):
+        if self.limg.colliderect(object.get_rect())==True:
+            object.health=object.health-1
+            self.velocity=[0,0]
+        else:
+            self.velocity=[-7,0]
+    #najpierw sprawdzamy kolizje, potem przesuwamy bałwana!!!!
