@@ -15,9 +15,9 @@ class Game:
         self._display_surf = pygame.display.set_mode(self.size, pygame.HWSURFACE | pygame.DOUBLEBUF)
         self._running = True
 
-        self.currScene.add_obj("bg", GameObject(self, 0, 0, 640, 480, "assets/TitleScreen.png"))
-        self.currScene.add_obj("start", GameObject(self, 300, 300, 185, 69, "assets/StartButton.png"))
-        self.currScene.add_obj("exit", GameObject(self, 300, 400, 185, 69, "assets/ExitButton.png"))
+        self.currScene.add_obj("bg", GameObject(self, 0, 0, 640, 480, "./assets/TitleScreen.png"))
+        self.currScene.add_obj("start", GameObject(self, 300, 300, 185, 69, "./assets/StartButton.png"))
+        self.currScene.add_obj("exit", GameObject(self, 300, 400, 185, 69, "./assets/ExitButton.png"))
 
     def on_event(self, event):
         if event.type == pygame.QUIT:
@@ -29,6 +29,7 @@ class Game:
         pass
 
     def on_render(self):
+        self._display_surf.fill(0)
         for object in self.currScene.objects.values():
             if object.visible:
                 self._display_surf.blit(object.img, object.rect)

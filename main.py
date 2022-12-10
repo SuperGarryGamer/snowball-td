@@ -1,1 +1,4 @@
-print("Hello Orld")
+from Game import Game
+
+g = Game()
+g.on_execute()
